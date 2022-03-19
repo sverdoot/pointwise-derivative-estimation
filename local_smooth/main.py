@@ -31,20 +31,25 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
     f_x = data_model.func(xs)
     ys = data_model.sample_ys(xs, config["seed"])
 
+    x0 = np.array(np.random.rand())
+    print(f"x_0: {x0:.3f}")
+
     Path(config["figpath"]).mkdir(exist_ok=True)
     plot_data(
         xs,
         f_x,
         ys,
+        x0=x0,
         savepath=Path(config["figpath"], f"function_data_{config['name']}.png"),
     )
 
-    x0 = np.array(np.random.rand())
-    print(f"x_0: {x0:.3f}")
     grad_x0 = data_model.grad_func(x0)
+    f_x0 = data_model.func(x0)
     bandwidths = np.logspace(
         config["bandwidth_max"], config["bandwidth_min"], config["num_bandwidths"]
     )
+
+
 
     local_smother = LocalSmoothing(config["order"])
     kernel = KernelFactory.get_kernel(config["kernel"])
@@ -55,11 +60,9 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
         print(f"\nBandwidth: {bandwidth}")
         weights = kernel(xs - x0, bandwidth)
         local_smother.fit(x0, xs, ys, weights)
-        derivative_estimate = local_smother.estimate[
-            1
-        ]  # TODO: change explicit index to variable
 
-        print(f"Estimate: {derivative_estimate:.3f}, true value: {grad_x0:.3f}")
+        print(f"Function estimate: {local_smother.estimate[0]:.3f}, true value: {f_x0:.3f}")
+        print(f"Derivative estimate: {local_smother.estimate[1]:.3f}, true value: {grad_x0:.3f}")
 
         weights = kernel(xs[:, None] - xs[None, :], bandwidth)
         kernel_matrix = local_smother.construct_kernel_matrix(xs, weights)
@@ -90,6 +93,13 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
         f"Chosen bandwidth: {best_bandwidth_emp:.5f}, risk: {true_risks[best_idx]:.3f}"
     )
 
+    # plot_true_risk(
+    #     bandwidths,
+    #     risk_estimates,
+    #     #estimate=(best_idx, best_risk_emp),
+    #     savepath=Path(config["figpath"], f"unbiased_risk_{config['name']}.png"),
+    # )
+    
     plot_true_risk(
         bandwidths,
         true_risks,

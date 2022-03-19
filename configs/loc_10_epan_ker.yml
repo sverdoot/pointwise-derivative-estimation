@@ -1,0 +1,13 @@
+sample_size: &sample_size 200
+n_coef: *sample_size
+seed: &seed 43
+order: 10 # order of local estimate
+sigma: 1.0
+figpath: 'figs'
+name: 'e10_k2'
+
+bandwidth_min: -2.5
+bandwidth_max: 1
+num_bandwidths: 30
+
+kernel: 'epanechnikov'
