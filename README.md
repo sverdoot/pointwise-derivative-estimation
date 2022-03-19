@@ -1,6 +1,6 @@
-# Advanced Statistical Methods, final project
+# Pointwise derivative estimation
 
-- [Advanced Statistical Methods, final project](#advanced-statistical-methods-final-project)
+- [Pointwise derivative estimation](#pointwise-derivative-estimation)
   - [Getting started](#getting-started)
   - [Overview](#overview)
   - [Results](#results)
@@ -9,7 +9,7 @@
 ## Getting started
 
 ```bash
-conda create --name asm  python==3.9
+conda create --name local_smooth  python==3.9
 ```
 
 if poetry is not installed:
@@ -19,7 +19,7 @@ curl -sSL https://install.python-poetry.org | python3 -
 ```
 
 ```bash
-conda activate asm
+conda activate local_smooth
 ```
 
 ```bash
@@ -27,7 +27,7 @@ chmod +x run.sh
 ```
 
 ```bash
-python asm/main.py --config configs/loc_lin_gauss_ker.yml
+python local_smooth/main.py --config configs/loc_lin_gauss_ker.yml
 ```
 
 ## Overview

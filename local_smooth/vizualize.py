@@ -54,15 +54,17 @@ def plot_true_risk(
 ):
     fig = plt.figure(figsize=(7, 5))
 
-    plt.plot(bandwidths, risks, label=r"true risk $\mathcal{R}(\hat{f})$")
+    plt.plot(bandwidths, risks, label=r"true risk $\mathcal{R}(\hat{f})$", zorder=1)
     if plot_optimal:
         optimal_idx = np.argmin(risks)
         plt.scatter(
             bandwidths[optimal_idx],
             risks[optimal_idx],
             marker="*",
+            color='r',
             label=r"optimal $\mathcal{R}_{m^*}$",
-            s=60,
+            s=100,
+            zorder=2
         )
     if estimate:
         # plt.scatter(bandwidths[estimate[0]], estimate[1], marker='x', label=r'estimate $\hat{\mathcal{R}_{m^*}$')
@@ -70,8 +72,10 @@ def plot_true_risk(
             bandwidths[estimate[0]],
             risks[estimate[0]],
             marker="x",
+            color='g',
             label=r"estimate $\mathcal{R}_{\hat{m}}$",
-            s=60,
+            s=100,
+            zorder=2
         )
 
     plt.xscale("log")

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "asm"
+name = "local_smooth"
 version = "0.0.1"
 description = ""
 authors = []
@@ -44,7 +44,7 @@ poetry-core = "1.0.4"
 flake8 = "^4.0.1"
 
 [tool.isort]
-src_paths = ["asm"]
+src_paths = ["local_smooth"]
 multi_line_output = 3
 include_trailing_comma = true
 force_grid_wrap = 0

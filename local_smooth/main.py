@@ -5,12 +5,12 @@ from typing import Any, Dict
 import numpy as np
 import ruamel.yaml as yaml
 
-from asm.generate_data import DataModel, generate_xs
-from asm.kernel import KernelFactory
-from asm.local_smoothing import LocalSmoothing
-from asm.risk import true_risk, unbiased_risk_estimate
-from asm.utils import random_seed
-from asm.vizualize import plot_data, plot_true_risk
+from local_smooth.generate_data import DataModel, generate_xs
+from local_smooth.kernel import KernelFactory
+from local_smooth.local_smoothing import LocalSmoothing
+from local_smooth.risk import true_risk, unbiased_risk_estimate
+from local_smooth.utils import random_seed
+from local_smooth.vizualize import plot_data, plot_true_risk
 
 
 def parse_arguments():
