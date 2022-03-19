@@ -23,14 +23,28 @@ def compute_transform(point, xs: np.ndarray, weights: np.ndarray):
 
 
 def true_risk(
-    point, xs: np.ndarray, weights: np.ndarray, f_x: np.ndarray, true_grad, sigma
+    point,
+    xs: np.ndarray,
+    weights: np.ndarray,
+    f_x: np.ndarray,
+    true_grad: np.ndarray,
+    sigma: float,
+    order: int = 1,
 ) -> float:
     """Computes true risk given function obseretions and true gradient value.
 
     $\mathcal{R}(\hat{f}) = \mathbb{E}((f^*)'(x_0) - \hat{f}'(x_0))^2$
 
     """
-    transform = compute_transform(point, xs, weights)
+    if order == 1:  # compute explicitly
+        transform = compute_transform(point, xs, weights)
+    else:
+        psi = (xs[None, :] - point) ** np.arange(order + 1)[:, None]
+        transform = (
+            np.linalg.inv(psi @ (weights[None, :] * psi).T) @ (weights[None, :] * psi)
+        )[
+            1
+        ]  # TODO: change explicit index to variable
     return (true_grad - transform.dot(f_x)) ** 2 + sigma ** 2 * np.linalg.norm(
         transform
     ) ** 2

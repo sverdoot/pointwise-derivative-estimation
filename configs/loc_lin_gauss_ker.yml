@@ -1,9 +1,12 @@
 sample_size: &sample_size 200
-seed: &seed 42
+seed: &seed 43
 order: 1 # order of local estimate
 sigma: 1.0
 figpath: 'figs'
+name: 'e1_k3'
 
-bandwidth_min: -5
+bandwidth_min: -4.5
 bandwidth_max: 1
 num_bandwidths: 30
+
+kernel: 'gaussian'

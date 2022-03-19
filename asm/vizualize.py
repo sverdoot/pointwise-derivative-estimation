@@ -33,7 +33,7 @@ def plot_data(
     plt.plot(xs, f_x, label="true function")
     plt.scatter(xs, ys, marker=".", color="r", label="data")
     plt.xlabel(r"$x$")
-    plt.ylabel(r"$f(x)$")
+    plt.ylabel(r"$y$")
     plt.grid()
     plt.legend()
     fig.tight_layout()

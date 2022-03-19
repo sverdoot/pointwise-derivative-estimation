@@ -22,7 +22,11 @@ conda activate asm
 ```
 
 ```bash
-python asm/main.py --configs configs/project.yml
+chmod +x run.sh
+```
+
+```bash
+python asm/main.py --config configs/loc_lin_gauss_ker.yml
 ```
 
 ## Overview

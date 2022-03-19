@@ -16,8 +16,6 @@ class LocalSmoothing:
         assert xs.shape[0] == weights.shape[0]
         psi = self._construct_feature(point, xs)  # (m + 1) x n
 
-        # print((np.linalg.inv(psi @ (weights[None, :] * psi).T) @ (weights[None, :] * psi))[1])
-
         lse_poly_coef = (
             np.linalg.inv(psi @ (weights[None, :] * psi).T)
             @ (weights[None, :] * psi)
