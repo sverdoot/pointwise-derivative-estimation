@@ -25,4 +25,4 @@ def rectangular_kernel(x: np.ndarray, h) -> np.ndarray:
 
 
 def epanichnikov_kernel(x: np.ndarray, h) -> np.ndarray:
-    return np.clip(1 - 1.0 / h * x ** 2, 0)
+    return np.clip(1 - 1.0 / h * x ** 2, 0, None)

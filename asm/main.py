@@ -24,8 +24,10 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
     if config["seed"]:
         random_seed(config["seed"])
 
-    xs = generate_xs()
-    data_model = DataModel(seed=config["seed"], sigma=config["sigma"])
+    xs = generate_xs(config["sample_size"])
+    data_model = DataModel(
+        n_coef=config["n_coef"], seed=config["seed"], sigma=config["sigma"]
+    )
     f_x = data_model.func(xs)
     ys = data_model.sample_ys(xs, config["seed"])
 

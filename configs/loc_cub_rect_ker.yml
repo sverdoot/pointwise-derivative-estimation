@@ -1,4 +1,5 @@
 sample_size: &sample_size 200
+n_coef: *sample_size
 seed: &seed 43
 order: 3 # order of local estimate
 sigma: 1.0
