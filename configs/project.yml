@@ -1,0 +1,9 @@
+sample_size: &sample_size 200
+seed: &seed 42
+order: 1 # order of local estimate
+sigma: 1.0
+figpath: 'figs'
+
+bandwidth_min: -5
+bandwidth_max: 1
+num_bandwidths: 30
