@@ -1,7 +1,7 @@
 import argparse
+import logging
 from pathlib import Path
 from typing import Any, Dict
-import logging
 
 import numpy as np
 import ruamel.yaml as yaml
@@ -13,8 +13,9 @@ from local_smooth.risk import true_risk, unbiased_risk_estimate
 from local_smooth.utils import random_seed
 from local_smooth.vizualize import plot_data, plot_true_risk
 
-#logger = logging.getLogger()
-FORMAT = '%(asctime)s %(message)s'
+
+# logger = logging.getLogger()
+FORMAT = "%(asctime)s %(message)s"
 logging.basicConfig(format=FORMAT, level=logging.INFO)
 
 
@@ -26,8 +27,8 @@ def parse_arguments():
 
 
 def main(config: Dict[str, Any], args: argparse.Namespace):
-    logging.info(f'Config: \n{yaml.safe_dump(config, default_flow_style=False)}')
-    
+    logging.info(f"Config: \n{yaml.safe_dump(config, default_flow_style=False)}")
+
     if config["seed"]:
         random_seed(config["seed"])
 
@@ -53,7 +54,9 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
     grad_x0 = data_model.grad_func(x0)
     f_x0 = data_model.func(x0)
     bandwidths = np.logspace(
-        config["bandwidth_max_log"], config["bandwidth_min_log"], config["num_bandwidths"]
+        config["bandwidth_max_log"],
+        config["bandwidth_min_log"],
+        config["num_bandwidths"],
     )
 
     local_smother = LocalSmoothing(config["order"])
@@ -62,12 +65,16 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
     risk_estimates = np.empty(bandwidths.shape[0])
     true_risks = np.empty(bandwidths.shape[0])
     for bandwidth_idx, bandwidth in enumerate(bandwidths):
-        logging.info(f"\nBandwidth: {bandwidth}")
+        logging.info(f"\nBandwidth: {bandwidth:.5f}")
         weights = kernel(xs - x0, bandwidth)
         local_smother.fit(x0, xs, ys, weights)
 
-        logging.info(f"Function estimate: {local_smother.estimate[0]:.3f}, true value: {f_x0:.3f}")
-        logging.info(f"Derivative estimate: {local_smother.estimate[1]:.3f}, true value: {grad_x0:.3f}")
+        logging.info(
+            f"Function estimate: {local_smother.estimate[0]:.3f}, true value: {f_x0:.3f}"
+        )
+        logging.info(
+            f"Derivative estimate: {local_smother.estimate[1]:.3f}, true value: {grad_x0:.3f}"
+        )
 
         weights = kernel(xs[:, None] - xs[None, :], bandwidth)
         kernel_matrix = local_smother.construct_kernel_matrix(xs, weights)
@@ -93,7 +100,9 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
     optimal_bandwidth = bandwidths[optimal_idx]
     optimal_risk = true_risks[optimal_idx]
 
-    logging.info(f"Oracle bandwidth: {optimal_bandwidth:.5f}, oracle risk: {optimal_risk:.3f}")
+    logging.info(
+        f"Oracle bandwidth: {optimal_bandwidth:.5f}, oracle risk: {optimal_risk:.3f}"
+    )
     logging.info(
         f"Chosen bandwidth: {best_bandwidth_emp:.5f}, risk: {true_risks[best_idx]:.3f}"
     )
@@ -104,7 +113,7 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
     #     #estimate=(best_idx, best_risk_emp),
     #     savepath=Path(config["figpath"], f"unbiased_risk_{config['name']}.png"),
     # )
-    
+
     plot_true_risk(
         bandwidths,
         true_risks,
@@ -112,7 +121,7 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
         savepath=Path(config["figpath"], f"true_risk_{config['name']}"),
     )
 
-    logging.info('='*50)
+    logging.info("=" * 50)
 
 
 if __name__ == "__main__":

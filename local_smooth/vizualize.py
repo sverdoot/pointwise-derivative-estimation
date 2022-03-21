@@ -31,10 +31,10 @@ def plot_data(
 ):
     fig = plt.figure(figsize=(7, 5))
 
-    plt.plot(xs, f_x, label="true function")
+    plt.plot(xs, f_x, label="true function", marker="o", markersize=5)
     plt.scatter(xs, ys, marker=".", color="r", label="data")
     if x0:
-        plt.axvline(x0, linestyle='--', label=r'$x_0$', color='black')
+        plt.axvline(x0, linestyle="--", label=r"$x_0$", color="black")
     plt.xlabel(r"$x$")
     plt.ylabel(r"$y$")
     plt.grid()
@@ -43,8 +43,8 @@ def plot_data(
     fig.tight_layout()
 
     if savepath:
-        plt.savefig(Path(savepath).with_suffix('.png'))
-        plt.savefig(Path(savepath).with_suffix('.pdf'))
+        plt.savefig(Path(savepath).with_suffix(".png"))
+        plt.savefig(Path(savepath).with_suffix(".pdf"))
     else:
         plt.show()
     plt.close()
@@ -59,17 +59,24 @@ def plot_true_risk(
 ):
     fig = plt.figure(figsize=(7, 5))
 
-    plt.plot(bandwidths, risks, label=r"true risk $\mathcal{R}(\hat{f})$", zorder=1)
+    plt.plot(
+        bandwidths,
+        risks,
+        label=r"true risk $\mathcal{R}(\hat{f})$",
+        zorder=1,
+        marker="o",
+        markersize=5,
+    )
     if plot_optimal:
         optimal_idx = np.argmin(risks)
         plt.scatter(
             bandwidths[optimal_idx],
             risks[optimal_idx],
             marker="*",
-            color='r',
+            color="r",
             label=r"optimal $\mathcal{R}_{m^*}$",
             s=100,
-            zorder=2
+            zorder=2,
         )
     if estimate:
         # plt.scatter(bandwidths[estimate[0]], estimate[1], marker='x', label=r'estimate $\hat{\mathcal{R}_{m^*}$')
@@ -77,10 +84,10 @@ def plot_true_risk(
             bandwidths[estimate[0]],
             risks[estimate[0]],
             marker="x",
-            color='g',
+            color="g",
             label=r"estimate $\mathcal{R}_{\hat{m}}$",
             s=100,
-            zorder=2
+            zorder=2,
         )
 
     plt.xscale("log")
@@ -91,8 +98,8 @@ def plot_true_risk(
     fig.tight_layout()
 
     if savepath:
-        plt.savefig(Path(savepath).with_suffix('.png'))
-        plt.savefig(Path(savepath).with_suffix('.pdf'))
+        plt.savefig(Path(savepath).with_suffix(".png"))
+        plt.savefig(Path(savepath).with_suffix(".pdf"))
     else:
         plt.show()
     plt.close()

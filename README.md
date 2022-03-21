@@ -2,6 +2,7 @@
 
 - [Pointwise derivative estimation](#pointwise-derivative-estimation)
   - [Getting started](#getting-started)
+  - [Usage](#usage)
   - [Overview](#overview)
   - [Results](#results)
   
@@ -12,22 +13,34 @@
 conda create --name local_smooth  python==3.9
 ```
 
-if poetry is not installed:
+if ```poetry``` is not installed:
 
 ```bash
 curl -sSL https://install.python-poetry.org | python3 -
+poetry config virtualenvs.create false --local
 ```
+
+install the project:
 
 ```bash
 conda activate local_smooth
+poetry install
 ```
 
 ```bash
 chmod +x run.sh
 ```
 
+## Usage
+
 ```bash
 python local_smooth/main.py --config configs/loc_lin_gauss_ker.yml
+```
+
+run all experiments:
+
+```bash
+./run.sh
 ```
 
 ## Overview
