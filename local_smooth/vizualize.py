@@ -43,7 +43,8 @@ def plot_data(
     fig.tight_layout()
 
     if savepath:
-        plt.savefig(savepath)
+        plt.savefig(Path(savepath).with_suffix('.png'))
+        plt.savefig(Path(savepath).with_suffix('.pdf'))
     else:
         plt.show()
     plt.close()
@@ -90,7 +91,8 @@ def plot_true_risk(
     fig.tight_layout()
 
     if savepath:
-        plt.savefig(savepath)
+        plt.savefig(Path(savepath).with_suffix('.png'))
+        plt.savefig(Path(savepath).with_suffix('.pdf'))
     else:
         plt.show()
     plt.close()

@@ -43,7 +43,7 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
         f_x,
         ys,
         x0=x0,
-        savepath=Path(config["figpath"], f"function_data_{config['name']}.png"),
+        savepath=Path(config["figpath"], f"function_data_{config['name']}"),
     )
 
     grad_x0 = data_model.grad_func(x0)
@@ -107,7 +107,7 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
         bandwidths,
         true_risks,
         estimate=(best_idx, best_risk_emp),
-        savepath=Path(config["figpath"], f"true_risk_{config['name']}.png"),
+        savepath=Path(config["figpath"], f"true_risk_{config['name']}"),
     )
 
     print('='*20)
