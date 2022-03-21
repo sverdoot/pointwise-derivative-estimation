@@ -81,6 +81,5 @@ extend-ignore = """
 extend-exclude = """
     # Frozen and not subject to change in this repo:
     thirdparty/*,
-    soul_gan/utils/metrics/compute_fid_tf.py,
     # # External to the project's coding standards:
     """

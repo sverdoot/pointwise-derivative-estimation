@@ -6,8 +6,8 @@ sigma: 1.0
 figpath: 'figs'
 name: 'e1_k2'
 
-bandwidth_min: -4.5
-bandwidth_max: 1
+bandwidth_min_log: -4.5
+bandwidth_max_log: 1
 num_bandwidths: 30
 
 kernel: 'epanechnikov'

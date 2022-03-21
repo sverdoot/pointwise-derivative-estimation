@@ -6,8 +6,8 @@ sigma: 1.0
 figpath: 'figs'
 name: 'e2_k1'
 
-bandwidth_min: -1.9
-bandwidth_max: 1
+bandwidth_min_log: -1.9
+bandwidth_max_log: 1
 num_bandwidths: 30
 
 kernel: 'rectangular'
