@@ -31,7 +31,7 @@ def plot_data(
 ):
     fig = plt.figure(figsize=(7, 5))
 
-    plt.plot(xs, f_x, label="true function", marker="o", markersize=5)
+    plt.plot(xs, f_x, color='b', markerfacecolor='k', marker='o', markersize=3, label="true function")
     plt.scatter(xs, ys, marker=".", color="r", label="data")
     if x0:
         plt.axvline(x0, linestyle="--", label=r"$x_0$", color="black")
