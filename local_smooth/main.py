@@ -21,6 +21,9 @@ def parse_arguments():
 
 
 def main(config: Dict[str, Any], args: argparse.Namespace):
+    print('Config: ')
+    print(yaml.safe_dump(config, default_flow_style=False))
+    
     if config["seed"]:
         random_seed(config["seed"])
 
@@ -106,6 +109,8 @@ def main(config: Dict[str, Any], args: argparse.Namespace):
         estimate=(best_idx, best_risk_emp),
         savepath=Path(config["figpath"], f"true_risk_{config['name']}.png"),
     )
+
+    print('='*20)
 
 
 if __name__ == "__main__":
